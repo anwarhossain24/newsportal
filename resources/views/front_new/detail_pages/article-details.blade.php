@@ -134,51 +134,52 @@
                                     </div>
                                     <a href="#" class="tags position-absolute">{{$postDetail->category->name}}</a>
                                 </div>
-                                <div class="news-desc mb-20">
-                                    <p>
-                                        @if(isset($postDetail->postArticle->article_content))
-                                            {!!  $postDetail->postArticle->article_content !!}
-                                        @endif
-                                    </p>
-                                </div>
-                                @if(($postDetail->additional_image))
-                                    <div class="mt-4">
-                                        <div class="row">
-                                            <div class="col-xl-12 col-lg-12">
-                                                <h4 class="">{{ __('messages.common.images') }}</h4>
-                                            </div>
-                                            <div class="row">
-                                                <div class="swiper addition-image-swiper">
-                                                    <div class="swiper-wrapper justify-content-center">
-                                                        @foreach($postDetail->additional_image as $image)
-                                                            <div class="swiper-slide mx-2"> <img src="{{$image}}" alt="" class="w-100" height="400"></div>
-                                                        @endforeach
-                                                    </div>
-                                                    <div class="swiper-button-next"></div>
-                                                    <div class="swiper-button-prev"></div>
-                                                    <div class="swiper-pagination"></div>
-                                                </div>
-
-
-                                            </div>
-                                        </div>
+                                @auth()
+                                    <div class="news-desc mb-20">
+                                        <p>
+                                            @if(isset($postDetail->postArticle->article_content) )
+                                                {!!  $postDetail->postArticle->article_content !!}
+                                            @endif
+                                        </p>
                                     </div>
-                                @endif
-                                @if($postDetail->rss_id != null)
-                                    @if($postDetail->rssFeed->show_btn == \App\Models\RssFeed::YES)
-                                        <div class="d-flex justify-content-end">
-                                            <a href="{{$postDetail->rss_link}}" target="_blank"
-                                               class="btn btn-success mb-2 text-white rounded-10">Read More</a>
+                                    @if(($postDetail->additional_image ))
+                                        <div class="mt-4">
+                                            <div class="row">
+                                                <div class="col-xl-12 col-lg-12">
+                                                    <h4 class="">{{ __('messages.common.images') }}</h4>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="swiper addition-image-swiper">
+                                                        <div class="swiper-wrapper justify-content-center">
+                                                            @foreach($postDetail->additional_image as $image)
+                                                                <div class="swiper-slide mx-2"> <img src="{{$image}}" alt="" class="w-100" height="400"></div>
+                                                            @endforeach
+                                                        </div>
+                                                        <div class="swiper-button-next"></div>
+                                                        <div class="swiper-button-prev"></div>
+                                                        <div class="swiper-pagination"></div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
                                         </div>
                                     @endif
-                                @endif
-                                @if($postDetail->optional_url != null)
-                                        <div class="d-flex justify-content-end">
-                                            <a href="{{$postDetail->optional_url}}" target="_blank"
-                                               class="btn btn-success mb-2 text-white rounded-10">Read More</a>
-                                        </div>
-                                @endif
-                                @if(!empty($postDetail->post_file) && count($postDetail->post_file) )
+                                    @if($postDetail->rss_id != null )
+                                        @if($postDetail->rssFeed->show_btn == \App\Models\RssFeed::YES)
+                                            <div class="d-flex justify-content-end">
+                                                <a href="{{$postDetail->rss_link}}" target="_blank"
+                                                   class="btn btn-success mb-2 text-white rounded-10">Read More</a>
+                                            </div>
+                                        @endif
+                                    @endif
+                                    @if($postDetail->optional_url != null )
+                                            <div class="d-flex justify-content-end">
+                                                <a href="{{$postDetail->optional_url}}" target="_blank"
+                                                   class="btn btn-success mb-2 text-white rounded-10">Read More</a>
+                                            </div>
+                                    @endif
+                                    @if(!empty($postDetail->post_file) && count($postDetail->post_file))
                                     <div class="mt-4 mb-4">
                                         <div class="row">
                                             <div class="col-xl-12 col-lg-12">
@@ -193,229 +194,259 @@
                                         </div>
                                     </div>
                                 @endif
-                            </div>
-
-                            <!-- start post Reaction -->
-                            @include('front_new.detail_pages.post-reaction')
-
-
-                            <!-- end post Reaction -->
-
-                            <!-- start share-this-post-section -->
-                            <section class="share-this-post-section mt-2 pt-md-3">
-                                <div class="row admin-desc d-flex flex-wrap justify-content-between mb-20">
-                                    @if(!empty(($postDetail->tags)))
-                                        <div class="col-sm-12">
-                                            <h5 class="fs-16 fw-6 text-black mb-3 pb-1 mx-2 float-start"> {{ __('messages.common.tags') }} </h5>
-                                            <div class="tag-blogs d-flex overflow-auto">
-                                                @foreach(explode(',',$postDetail->tags) as $tags)
-                                                    <div class="tag br-gray-100 d-inline-block py-2 px-3 mb-3 me-2">
-                                                        <a href="{{ route('popularTagPage',$tags) }}"
-                                                           class="fs-14 text-black ">{!! $tags !!}</a>
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    @endif
+                                @endauth
                                 </div>
-                                <div class="admin-post position-relative pt-60">
-                                    @if(!empty($previousPost))
-                                        <a href="{{ route('detailPage',$previousPost->slug) }}"
-                                           class='prev-btn fs-16 text-black fw-6'>
-                                            <i class="fa-solid fa-angle-left fs-14 me-1"></i>{{ __('messages.details.previous_post') }}
-                                        </a>
-                                    @endif
-                                    @if(!empty($nextPost))
-                                        <a href="{{ route('detailPage',$nextPost->slug) }}"
-                                           class='next-btn fs-16 text-black fw-6'>{{ __('messages.details.next_post') }}
-                                            <i class="fa-solid fa-angle-right fs-14 ms-1"></i>
-                                        </a>
-                                    @endif
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            @if(!empty($previousPost))
-                                                <div class="card d-flex flex-row mb-40">
-                                                    <div class="col-4 card-img-top">
-                                                        <a href="{{ route('detailPage',$previousPost->slug) }}">
-                                                            {{--                                                            <img data-src="{{ $previousPost->post_image }}" alt=""--}}
-                                                            {{--                                                                 src="{{ asset('front_web/images/bg-process.png') }}"--}}
-                                                            {{--                                                                 class="lazy" height="100" width="100">--}}
-                                                            <img src="{{ $previousPost->post_image }}" alt=""
-                                                                 height="100" width="100">
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-8 card-body ms-4">
-                                                        <h5 class="card-title fs-14 fw-6 text-black">
-                                                            <a href="{{ route('detailPage',$previousPost->slug) }}"
-                                                               class="fs-14 fw-6 text-black position-relative">
-                                                                {!! \Illuminate\Support\Str::limit($previousPost['title'],40,'...') !!}
-                                                            </a>
-                                                        </h5>
-                                                        <span class="fs-14 text-gray"> {{ ucfirst(__('messages.common.'.strtolower($previousPost['created_at']->format('M')))) }} {{ $previousPost['created_at']->format('d, Y') }}</span>
-                                                    </div>
 
-                                                </div>
-                                            @endif
-                                        </div>
-                                        <div class="col-md-6">
-                                            @if(!empty($nextPost))
-                                                <div class="card d-flex flex-row mb-40">
-                                                    <div class="col-4 card-img-top ">
-                                                        <a href="{{ route('detailPage',$nextPost->slug) }}">
-                                                            {{--                                                            <img data-src="{{ $nextPost->post_image }}"--}}
-                                                            {{--                                                                 src="{{ asset('front_web/images/bg-process.png') }}"--}}
-                                                            {{--                                                                 height="100" width="100" class="lazy">--}}
-                                                            <img src="{{ $nextPost->post_image }}"
-                                                                 height="100" width="100">
-                                                        </a>
-                                                    </div>
-                                                    <div class="col-8 ms-4 ">
-                                                        <h5 class="card-title fs-14 fw-6 text-black">
-                                                            <a href="{{ route('detailPage',$nextPost->slug) }}"
-                                                               class="fs-14 fw-6 text-black position-relative">
-                                                                {!! \Illuminate\Support\Str::limit($nextPost['title'],40,'...') !!}
-                                                            </a>
-                                                        </h5>
-                                                        <span class=" fs-14 text-gray">{{ ucfirst(__('messages.common.'.strtolower($nextPost['created_at']->format('M')))) }} {{ $nextPost['created_at']->format('d, Y') }}</span>
-                                                    </div>
-                                                </div>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-                            <!-- end share-this-post-section -->
-                            @if(checkAdSpaced('post_details'))
-                                @if(isset(getAdImageDesktop(\App\Models\AdSpaces::POST_DETAILS)->code))
-                                    <div class="index-top-desktop ad-space-url-desktop">
-                                        {!! getAdImageDesktop(\App\Models\AdSpaces::POST_DETAILS)->code !!}
-                                    </div>
-                                @elseif ($adsDesktop = getAdImageDesktop(\App\Models\AdSpaces::POST_DETAILS))
-                                    <div class="container index-top-desktop">
-                                        <a href="{{$adsDesktop->ad_url}}"
-                                           target="_blank">
-                                            <img src="{{asset($adsDesktop->ad_banner)}}"
-                                                 width="800" class="img-fluid">
-                                        </a>
-                                    </div>
-                                @endif
-                                @if(isset(getAdImageDesktop(\App\Models\AdSpaces::POST_DETAILS)->code))
-                                    <div class="index-top-mobile ad-space-url-mobile">
-                                        {!! getAdImageDesktop(\App\Models\AdSpaces::POST_DETAILS)->code !!}
-                                    </div>
-                                @elseif ($adRecord = getAdImageMobile(\App\Models\AdSpaces::POST_DETAILS))
-                                    <div class=" container index-top-mobile">
-                                        <a href="{{$adRecord->ad_url}}"
-                                           target="_blank">
-                                            <img src="{{asset($adRecord->ad_banner)}}"
-                                                 width="350" class="img-fluid">
-                                        </a>
-                                    </div>
-                                @endif
+                                <!-- start post Reaction -->
+                            @if($postDetail->show_registered_user)
+                                @include('front_new.detail_pages.post-reaction')
                             @endif
-                            <!--start related-post-section -->
-                            @if($relatedPosts->count() > 0)
-                                <section class="related-post-section pt-40 mb-xl-5 mb-lg-4">
-                                    <div class="section-heading border-0 mb-0">
-                                        <div class="row align-items-center">
-                                            <div class="col-12 section-heading-left">
-                                                <h2 class="text-black mb-0"> {{ __('messages.details.related_post') }}</h2>
+
+                            @if(!$postDetail->show_registered_user && !Auth::check())
+                                <style>
+                                    .premium_alert{
+                                        position: relative;
+                                        padding: 1rem 1rem;
+                                        margin-bottom: 1rem;
+                                        border: 1px solid transparent;
+                                        border-radius: .25rem;
+                                        color: #847431;
+                                        background-color: #fff3cd;
+                                        border-color: #ffecb5;
+                                        text-align: center;
+                                        margin-top: 20px;
+                                    }
+                                    .premium_alert>a{
+                                        margin-top: 10px;
+                                        border-radius: 5px !important;
+                                    }
+                                </style>
+                                <div class="premium_alert">
+                                   <div>
+                                       <strong>Attention:</strong> To read this article you need to be a login user and premium member.
+                                   </div>
+                                    <a href="{{route("subscription.upgrade")}}" class="btn btn-warning">Become a premium member</a>
+                                </div>
+                            @endif
+
+                                <!-- end post Reaction -->
+
+                                <!-- start share-this-post-section -->
+                                <section class="share-this-post-section mt-2 pt-md-3">
+                                    <div class="row admin-desc d-flex flex-wrap justify-content-between mb-20">
+                                        @if(!empty(($postDetail->tags)))
+                                            <div class="col-sm-12">
+                                                <h5 class="fs-16 fw-6 text-black mb-3 pb-1 mx-2 float-start"> {{ __('messages.common.tags') }} </h5>
+                                                <div class="tag-blogs d-flex overflow-auto">
+                                                    @foreach(explode(',',$postDetail->tags) as $tags)
+                                                        <div class="tag br-gray-100 d-inline-block py-2 px-3 mb-3 me-2">
+                                                            <a href="{{ route('popularTagPage',$tags) }}"
+                                                               class="fs-14 text-black ">{!! $tags !!}</a>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
                                             </div>
-                                        </div>
+                                        @endif
                                     </div>
-                                    <div class="related-post pt-60">
+
+                                    <div class="admin-post position-relative pt-60">
+                                        @if(!empty($previousPost))
+                                            <a href="{{ route('detailPage',$previousPost->slug) }}"
+                                               class='prev-btn fs-16 text-black fw-6'>
+                                                <i class="fa-solid fa-angle-left fs-14 me-1"></i>{{ __('messages.details.previous_post') }}
+                                            </a>
+                                        @endif
+                                        @if(!empty($nextPost))
+                                            <a href="{{ route('detailPage',$nextPost->slug) }}"
+                                               class='next-btn fs-16 text-black fw-6'>{{ __('messages.details.next_post') }}
+                                                <i class="fa-solid fa-angle-right fs-14 ms-1"></i>
+                                            </a>
+                                        @endif
                                         <div class="row">
-                                            @foreach($relatedPosts as $relatedPost)
-                                                <div class="col-lg-4 col-md-4 col-sm-6 mb-2">
-                                                    <div class="card position-relative slide-item">
-                                                        <div class="card-img-top">
-                                                            <a href="{{ route('detailPage',$relatedPost->slug) }}">
-                                                                {{--                                                                <img data-src="{{ $relatedPost['post_image'] }}" alt="" src="{{ asset('front_web/images/bg-process.png') }}" class="w-100 h-100 lazy">--}}
-                                                                <img src="{{ $relatedPost['post_image'] }}" alt=""
-                                                                     class="w-100 h-100">
+                                            <div class="col-md-6">
+                                                @if(!empty($previousPost))
+                                                    <div class="card d-flex flex-row mb-40">
+                                                        <div class="col-4 card-img-top">
+                                                            <a href="{{ route('detailPage',$previousPost->slug) }}">
+                                                                {{--                                                            <img data-src="{{ $previousPost->post_image }}" alt=""--}}
+                                                                {{--                                                                 src="{{ asset('front_web/images/bg-process.png') }}"--}}
+                                                                {{--                                                                 class="lazy" height="100" width="100">--}}
+                                                                <img src="{{ $previousPost->post_image }}" alt=""
+                                                                     height="100" width="100">
                                                             </a>
                                                         </div>
-                                                        <div class="card-body">
-                                                            <a href="#"
-                                                               class="tags position-absolute  fw-7">{{ $relatedPost['category']['name'] }}</a>
-                                                            <h5 class="card-title mb-1 fs-16 text-black fw-6">
-                                                                <a class="text-black"
-                                                                   href="{{ route('detailPage',$relatedPost->slug) }}">
-                                                                    {!!  $relatedPost['title'] !!}
+                                                        <div class="col-8 card-body ms-4">
+                                                            <h5 class="card-title fs-14 fw-6 text-black">
+                                                                <a href="{{ route('detailPage',$previousPost->slug) }}"
+                                                                   class="fs-14 fw-6 text-black position-relative">
+                                                                    {!! \Illuminate\Support\Str::limit($previousPost['title'],40,'...') !!}
                                                                 </a>
                                                             </h5>
-                                                            <span class="card-text fs-12 text-gray">{{ ucfirst(__('messages.common.'.strtolower($relatedPost['created_at']->format('M')))) }} {{ $relatedPost['created_at']->format('d, Y') }}</span>
+                                                            <span class="fs-14 text-gray"> {{ ucfirst(__('messages.common.'.strtolower($previousPost['created_at']->format('M')))) }} {{ $previousPost['created_at']->format('d, Y') }}</span>
+                                                        </div>
+
+                                                    </div>
+                                                @endif
+                                            </div>
+                                            <div class="col-md-6">
+                                                @if(!empty($nextPost))
+                                                    <div class="card d-flex flex-row mb-40">
+                                                        <div class="col-4 card-img-top ">
+                                                            <a href="{{ route('detailPage',$nextPost->slug) }}">
+                                                                {{--                                                            <img data-src="{{ $nextPost->post_image }}"--}}
+                                                                {{--                                                                 src="{{ asset('front_web/images/bg-process.png') }}"--}}
+                                                                {{--                                                                 height="100" width="100" class="lazy">--}}
+                                                                <img src="{{ $nextPost->post_image }}"
+                                                                     height="100" width="100">
+                                                            </a>
+                                                        </div>
+                                                        <div class="col-8 ms-4 ">
+                                                            <h5 class="card-title fs-14 fw-6 text-black">
+                                                                <a href="{{ route('detailPage',$nextPost->slug) }}"
+                                                                   class="fs-14 fw-6 text-black position-relative">
+                                                                    {!! \Illuminate\Support\Str::limit($nextPost['title'],40,'...') !!}
+                                                                </a>
+                                                            </h5>
+                                                            <span class=" fs-14 text-gray">{{ ucfirst(__('messages.common.'.strtolower($nextPost['created_at']->format('M')))) }} {{ $nextPost['created_at']->format('d, Y') }}</span>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                @if($loop->iteration >= 6)
-                                                    @break
                                                 @endif
-                                            @endforeach
+                                            </div>
                                         </div>
                                     </div>
                                 </section>
-                            @endif
-                            <!--end related-post-section -->
-
-                            <!-- start post-comment-section -->
-                            <section class="post-comment-section bg-light px-30 py-4">
-                                <h5 class="fs-16 text-black fw-6 mb-3">{{ __('messages.comment.post_a_comment') }}</h5>
-                                <form id="commentForm">
-                                    @csrf
-                                    <input type="hidden" name="post_id" value="{{ $postDetail->id }}">
-                                    <input type="hidden" name="user_id"
-                                           value="{{ isset(getLogInUser()->id) ? getLogInUser()->id : null }}">
-                                    <div class="row">
-                                        @if(!Auth::check())
-                                            <div class="col-md-6">
-                                                <input type="text" class="form-control fs-14 text-gray" name="name"
-                                                       id="name"
-                                                       placeholder="{{ __('messages.comment.enter_your_name') }}"
-                                                       required>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input type="email" name="email" id="email"
-                                                       class="form-control fs-14 text-gray"
-                                                       placeholder="{{ __('messages.comment.enter_your_email') }}"
-                                                       required>
-                                            </div>
-                                        @endif
-                                        <div class="col-12">
-                                            <textarea class="form-control fs-14 text-gray" name="comment" id="comment"
-                                                      rows="3"
-                                                      placeholder="{{ __('messages.comment.type_your_comments') }}"
-                                                      required></textarea>
+                                <!-- end share-this-post-section -->
+                                @if(checkAdSpaced('post_details'))
+                                    @if(isset(getAdImageDesktop(\App\Models\AdSpaces::POST_DETAILS)->code))
+                                        <div class="index-top-desktop ad-space-url-desktop">
+                                            {!! getAdImageDesktop(\App\Models\AdSpaces::POST_DETAILS)->code !!}
                                         </div>
-                                        <div class="col-12 mb-2">
-                                            @if($showCaptcha == "1")
-                                                <input type="hidden" value="{{ $settings['show_captcha'] }}"
-                                                       id="googleCaptch">
-                                                <div class="form-group mb-1">
-                                                    <div class="g-recaptcha" id="gRecaptchaContainerPostDetails"
-                                                         data-sitekey="{{ $settings['site_key'] }}"></div>
-                                                    <div id="g-recaptcha-error"></div>
+                                    @elseif ($adsDesktop = getAdImageDesktop(\App\Models\AdSpaces::POST_DETAILS))
+                                        <div class="container index-top-desktop">
+                                            <a href="{{$adsDesktop->ad_url}}"
+                                               target="_blank">
+                                                <img src="{{asset($adsDesktop->ad_banner)}}"
+                                                     width="800" class="img-fluid">
+                                            </a>
+                                        </div>
+                                    @endif
+                                    @if(isset(getAdImageDesktop(\App\Models\AdSpaces::POST_DETAILS)->code))
+                                        <div class="index-top-mobile ad-space-url-mobile">
+                                            {!! getAdImageDesktop(\App\Models\AdSpaces::POST_DETAILS)->code !!}
+                                        </div>
+                                    @elseif ($adRecord = getAdImageMobile(\App\Models\AdSpaces::POST_DETAILS))
+                                        <div class=" container index-top-mobile">
+                                            <a href="{{$adRecord->ad_url}}"
+                                               target="_blank">
+                                                <img src="{{asset($adRecord->ad_banner)}}"
+                                                     width="350" class="img-fluid">
+                                            </a>
+                                        </div>
+                                    @endif
+                                @endif
+                                <!--start related-post-section -->
+                                @if($relatedPosts->count() > 0)
+                                    <section class="related-post-section pt-40 mb-xl-5 mb-lg-4">
+                                        <div class="section-heading border-0 mb-0">
+                                            <div class="row align-items-center">
+                                                <div class="col-12 section-heading-left">
+                                                    <h2 class="text-black mb-0"> {{ __('messages.details.related_post') }}</h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="related-post pt-60">
+                                            <div class="row">
+                                                @foreach($relatedPosts as $relatedPost)
+                                                    <div class="col-lg-4 col-md-4 col-sm-6 mb-2">
+                                                        <div class="card position-relative slide-item">
+                                                            <div class="card-img-top">
+                                                                <a href="{{ route('detailPage',$relatedPost->slug) }}">
+                                                                    {{--                                                                <img data-src="{{ $relatedPost['post_image'] }}" alt="" src="{{ asset('front_web/images/bg-process.png') }}" class="w-100 h-100 lazy">--}}
+                                                                    <img src="{{ $relatedPost['post_image'] }}" alt=""
+                                                                         class="w-100 h-100">
+                                                                </a>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <a href="#"
+                                                                   class="tags position-absolute  fw-7">{{ $relatedPost['category']['name'] }}</a>
+                                                                <h5 class="card-title mb-1 fs-16 text-black fw-6">
+                                                                    <a class="text-black"
+                                                                       href="{{ route('detailPage',$relatedPost->slug) }}">
+                                                                        {!!  $relatedPost['title'] !!}
+                                                                    </a>
+                                                                </h5>
+                                                                <span class="card-text fs-12 text-gray">{{ ucfirst(__('messages.common.'.strtolower($relatedPost['created_at']->format('M')))) }} {{ $relatedPost['created_at']->format('d, Y') }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    @if($loop->iteration >= 6)
+                                                        @break
+                                                    @endif
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </section>
+                                @endif
+                                <!--end related-post-section -->
+
+                                <!-- start post-comment-section -->
+                                <section class="post-comment-section bg-light px-30 py-4">
+                                    <h5 class="fs-16 text-black fw-6 mb-3">{{ __('messages.comment.post_a_comment') }}</h5>
+                                    <form id="commentForm">
+                                        @csrf
+                                        <input type="hidden" name="post_id" value="{{ $postDetail->id }}">
+                                        <input type="hidden" name="user_id"
+                                               value="{{ isset(getLogInUser()->id) ? getLogInUser()->id : null }}">
+                                        <div class="row">
+                                            @if(!Auth::check())
+                                                <div class="col-md-6">
+                                                    <input type="text" class="form-control fs-14 text-gray" name="name"
+                                                           id="name"
+                                                           placeholder="{{ __('messages.comment.enter_your_name') }}"
+                                                           required>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <input type="email" name="email" id="email"
+                                                           class="form-control fs-14 text-gray"
+                                                           placeholder="{{ __('messages.comment.enter_your_email') }}"
+                                                           required>
                                                 </div>
                                             @endif
+                                            <div class="col-12">
+                                                <textarea class="form-control fs-14 text-gray" name="comment" id="comment"
+                                                          rows="3"
+                                                          placeholder="{{ __('messages.comment.type_your_comments') }}"
+                                                          required></textarea>
+                                            </div>
+                                            <div class="col-12 mb-2">
+                                                @if($showCaptcha == "1")
+                                                    <input type="hidden" value="{{ $settings['show_captcha'] }}"
+                                                           id="googleCaptch">
+                                                    <div class="form-group mb-1">
+                                                        <div class="g-recaptcha" id="gRecaptchaContainerPostDetails"
+                                                             data-sitekey="{{ $settings['site_key'] }}"></div>
+                                                        <div id="g-recaptcha-error"></div>
+                                                    </div>
+                                                @endif
+                                            </div>
                                         </div>
-                                    </div>
-                                    <button type="submit"
-                                            class="btn btn-primary ">{{ __('messages.common.submit') }}</button>
-                                </form>
-                            </section>
-                            <!-- end post-comment-section -->
+                                        <button type="submit"
+                                                class="btn btn-primary ">{{ __('messages.common.submit') }}</button>
+                                    </form>
+                                </section>
+                                <!-- end post-comment-section -->
 
-                            <!--start comment-section -->
-                            <section class="comment-section mt-4 pt-3 blog-post-comment-view">
-                                <h3 class=" text-black fw-6 mb-3 comment-data @if(empty($totalComments)) d-none @endif">
-                                    {{ __('messages.comments') }}
-                                    <span class="ms-2 count-data">
-                                         {{  $totalComments }}
-                                    </span>
-                                </h3>
-                                @php
-                                    $inStyle = 'style=';
-                                    $style   = '"overflow-y: auto; max-height: 325px"';
+                                <!--start comment-section -->
+                                <section class="comment-section mt-4 pt-3 blog-post-comment-view">
+                                    <h3 class=" text-black fw-6 mb-3 comment-data @if(empty($totalComments)) d-none @endif">
+                                        {{ __('messages.comments') }}
+                                        <span class="ms-2 count-data">
+                                             {{  $totalComments }}
+                                        </span>
+                                    </h3>
+                                    @php
+                                        $inStyle = 'style=';
+                                        $style   = '"overflow-y: auto; max-height: 325px"';
                                 @endphp
                                 <div class="comment-view" {!! $totalComments >= 3 ? $inStyle.$style : '' !!}>
                                     @foreach($comments as $comment)

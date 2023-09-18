@@ -479,7 +479,7 @@ class Post extends Model implements HasMedia
     {
         parent::boot();
 
-        static::addGlobalScope(new AuthoriseUserActivePostScope());
+//        static::addGlobalScope(new AuthoriseUserActivePostScope());
 
         static::addGlobalScope(new LanguageScope());
 
