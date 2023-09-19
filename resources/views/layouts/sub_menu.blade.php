@@ -39,7 +39,7 @@
             </a>
         </li>
     @endcan
-    
+
     @can('manage_albums_category')
         <li class="nav-item position-relative mx-xl-3 mb-3 mb-xl-0 {{ (!Request::is('admin/gallery-images*', 'admin/albums*','admin/album-categories*')) ? 'd-none' : '' }}">
             <a class="nav-link p-0 {{ Request::is('admin/album-categories*') ? 'active' : ''  }}" href="{{ route('album-categories.index') }}">
@@ -70,7 +70,7 @@
             </a>
         </li>
     @endcan
-    
+
     @can('manage_emoji')
         <li class="nav-item position-relative mx-xl-3 mb-3 mb-xl-0 {{ (!Request::is('admin/emoji*')) ? 'd-none' : '' }}">
             <a class="nav-link p-0 {{ Request::is('admin/emoji*') ? 'active' : ''  }}" href="{{ route('emoji.index') }}">
@@ -78,7 +78,7 @@
             </a>
         </li>
     @endcan
-    
+
     <li class="nav-item position-relative mx-xl-3 mb-3 mb-xl-0 {{ (!Request::is('admin/pages*')) ? 'd-none' : '' }}">
         <a class="nav-link p-0 {{ Request::is('admin/pages*') ? 'active' : ''  }}" href="{{ route('pages.index') }}">
             {{ __('messages.pages') }}
@@ -95,7 +95,7 @@
             {{ __('messages.ad_space.ad_space') }}
         </a>
     </li>
-    
+
     <li class="nav-item position-relative mx-xl-3 mb-3 mb-xl-0 {{ (!Request::is('admin/rss-feed*')) ? 'd-none' : '' }}">
         <a class="nav-link p-0 {{ Request::is('admin/rss-feed*') ? 'active' : ''  }}" href="{{ route('rss-feed.index') }}">
             {{ __('messages.rss-feed') }}
@@ -145,7 +145,7 @@
     </li>
     <li class="nav-item position-relative mx-xl-3 mb-3 mb-xl-0 {{ (!Request::is('admin/subscribed-user-plans*')) ? 'd-none' : '' }}">
         <a class="nav-link p-0 {{ Request::is('admin/subscribed-user-plans*') ? 'active' : ''  }}" href="{{ route('subscribed.user.plans') }}">
-            {{ __('messages.subscribed_user') }}        
+            {{ __('messages.subscribed_user') }}
         </a>
     </li>
     <li class="nav-item position-relative mx-xl-3 mb-3 mb-xl-0 {{ (!Request::is('admin/news-letter*')) ? 'd-none' : '' }}">

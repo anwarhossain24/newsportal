@@ -555,6 +555,10 @@ return [
         'manual_payment_status'                  => 'Manual Payment Status',
         'manual_payment_request'                 => 'Manual Payment Request',
         'test_mail'                              => 'Test Mail',
+        'email' => 'Enter an Email',
+        'emailsend' =>'Send Email',
+        'mail_subject' => 'Mail Subject',
+        'mail_content' => 'Mail Content',
     ],
     'role' => [
         'role' => 'Role',

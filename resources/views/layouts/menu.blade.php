@@ -72,15 +72,15 @@
         </a>
     </li>
 @endcan
-@canany(['manage_gallery_image','manage_albums','manage_albums_category'])
-    <li class="nav-item aside-item-collapse {{ Request::is(['admin/gallery-images*', 'admin/albums*','admin/album-categories*']) ? 'active' : '' }}">
-        <a class="nav-link aside-collapse-btn d-flex align-items-center py-3"
-           href="{{ route('album-categories.index') }}">
-            <span class="aside-menu-icon pe-3"><i class="fas fa-images fs-4"></i></span>
-            <span class="aside-menu-title">{!! __('messages.albums') !!}</span>
-        </a>
-    </li>
-@endcanany
+{{--@canany(['manage_gallery_image','manage_albums','manage_albums_category'])--}}
+{{--    <li class="nav-item aside-item-collapse {{ Request::is(['admin/gallery-images*', 'admin/albums*','admin/album-categories*']) ? 'active' : '' }}">--}}
+{{--        <a class="nav-link aside-collapse-btn d-flex align-items-center py-3"--}}
+{{--           href="{{ route('album-categories.index') }}">--}}
+{{--            <span class="aside-menu-icon pe-3"><i class="fas fa-images fs-4"></i></span>--}}
+{{--            <span class="aside-menu-title">{!! __('messages.albums') !!}</span>--}}
+{{--        </a>--}}
+{{--    </li>--}}
+{{--@endcanany--}}
 @can('cash_payment')
     <li class="nav-item aside-item-collapse {{ Request::is(['admin/cash-payment*']) ? 'active' : '' }}">
         <a class="nav-link aside-collapse-btn d-flex align-items-center py-3" href="{{ route('cash-payment') }}">
@@ -107,46 +107,46 @@
         </a>
     </li>
 @endcan
-@can('manage_menu')
-    <li class="nav-item {{ Request::is('admin/menus*') ? 'active' : '' }}">
-        <a class="nav-link d-flex align-items-center py-3" aria-current="page" href="{{ route('menus.index') }}">
-        <span class="aside-menu-icon pe-3">
-            <i class="fas fa-bars fs-4"></i>
-        </span>
-            <span class="aside-menu-title">{!! __('messages.menus') !!}</span>
-        </a>
-    </li>
-@endcan
-@can('manage_rss_feeds')
-<li class="nav-item {{ Request::is('admin/rss-feed*') ? 'active' : '' }}">
-    <a class="nav-link d-flex align-items-center py-3" aria-current="page" href="{{ route('rss-feed.index') }}">
-        <span class="aside-menu-icon pe-3">
-            <i class="fa fa-rss"></i>
-        </span>
-        <span class="aside-menu-title">  {{ __('messages.rss-feed') }}</span>
-    </a>
-</li>
-@endcan
-@can('manage_navigation')
-    <li class="nav-item {{ Request::is('admin/navigation*') ? 'active' : '' }}">
-        <a class="nav-link d-flex align-items-center py-3" aria-current="page" href="{{ route('navigation.index') }}">
-        <span class="aside-menu-icon pe-3">
-            <i class="fas fa-th fs-4"></i>
-        </span>
-            <span class="aside-menu-title">{!! __('messages.navigation') !!}</span>
-        </a>
-    </li>
-@endcan
-@can('manage_polls')
-    <li class="nav-item {{ Request::is('admin/polls*') ? 'active' : '' }}">
-        <a class="nav-link d-flex align-items-center py-3" aria-current="page" href="{{ route('polls.index') }}">
-        <span class="aside-menu-icon pe-3">
-            <i class="fas fa-list fs-4"></i>
-        </span>
-            <span class="aside-menu-title">{!! __('messages.polls') !!}</span>
-        </a>
-    </li>
-@endcan
+{{--@can('manage_menu')--}}
+{{--    <li class="nav-item {{ Request::is('admin/menus*') ? 'active' : '' }}">--}}
+{{--        <a class="nav-link d-flex align-items-center py-3" aria-current="page" href="{{ route('menus.index') }}">--}}
+{{--        <span class="aside-menu-icon pe-3">--}}
+{{--            <i class="fas fa-bars fs-4"></i>--}}
+{{--        </span>--}}
+{{--            <span class="aside-menu-title">{!! __('messages.menus') !!}</span>--}}
+{{--        </a>--}}
+{{--    </li>--}}
+{{--@endcan--}}
+{{--@can('manage_rss_feeds')--}}
+{{--<li class="nav-item {{ Request::is('admin/rss-feed*') ? 'active' : '' }}">--}}
+{{--    <a class="nav-link d-flex align-items-center py-3" aria-current="page" href="{{ route('rss-feed.index') }}">--}}
+{{--        <span class="aside-menu-icon pe-3">--}}
+{{--            <i class="fa fa-rss"></i>--}}
+{{--        </span>--}}
+{{--        <span class="aside-menu-title">  {{ __('messages.rss-feed') }}</span>--}}
+{{--    </a>--}}
+{{--</li>--}}
+{{--@endcan--}}
+{{--@can('manage_navigation')--}}
+{{--    <li class="nav-item {{ Request::is('admin/navigation*') ? 'active' : '' }}">--}}
+{{--        <a class="nav-link d-flex align-items-center py-3" aria-current="page" href="{{ route('navigation.index') }}">--}}
+{{--        <span class="aside-menu-icon pe-3">--}}
+{{--            <i class="fas fa-th fs-4"></i>--}}
+{{--        </span>--}}
+{{--            <span class="aside-menu-title">{!! __('messages.navigation') !!}</span>--}}
+{{--        </a>--}}
+{{--    </li>--}}
+{{--@endcan--}}
+{{--@can('manage_polls')--}}
+{{--    <li class="nav-item {{ Request::is('admin/polls*') ? 'active' : '' }}">--}}
+{{--        <a class="nav-link d-flex align-items-center py-3" aria-current="page" href="{{ route('polls.index') }}">--}}
+{{--        <span class="aside-menu-icon pe-3">--}}
+{{--            <i class="fas fa-list fs-4"></i>--}}
+{{--        </span>--}}
+{{--            <span class="aside-menu-title">{!! __('messages.polls') !!}</span>--}}
+{{--        </a>--}}
+{{--    </li>--}}
+{{--@endcan--}}
 @can('manage_plans')
     <li class="nav-item {{ Request::is('admin/plans*') ? 'active' : '' }}">
         <a class="nav-link d-flex align-items-center py-3" aria-current="page" href="{{ route('plans.index') }}">
@@ -188,28 +188,28 @@
     </li>
 @endcan
 
-@can('manage_seo_tools')
+{{--@can('manage_seo_tools')--}}
 
-    <li class="nav-item {{ Request::is('admin/seo-tools*') ? 'active' : '' }}">
-        <a class="nav-link d-flex align-items-center py-3" aria-current="page" href="{{ route('seo-tools.index') }}">
-        <span class="aside-menu-icon pe-3">
-            <i class="fas fa-wrench fs-4"></i>
-        </span>
-            <span class="aside-menu-title">{!! __('messages.seo-tools') !!}</span>
-        </a>
-    </li>
+{{--    <li class="nav-item {{ Request::is('admin/seo-tools*') ? 'active' : '' }}">--}}
+{{--        <a class="nav-link d-flex align-items-center py-3" aria-current="page" href="{{ route('seo-tools.index') }}">--}}
+{{--        <span class="aside-menu-icon pe-3">--}}
+{{--            <i class="fas fa-wrench fs-4"></i>--}}
+{{--        </span>--}}
+{{--            <span class="aside-menu-title">{!! __('messages.seo-tools') !!}</span>--}}
+{{--        </a>--}}
+{{--    </li>--}}
 
-@endcan
-@can('manage_language')
-    <li class="nav-item {{ Request::is('admin/languages*') ? 'active' : '' }}">
-        <a class="nav-link d-flex align-items-center py-3" aria-current="page" href="{{ route('languages.index') }}">
-        <span class="aside-menu-icon pe-3">
-            <i class="fas fa-language fs-4"></i>
-        </span>
-            <span class="aside-menu-title">{!! __('messages.languages') !!}</span>
-        </a>
-    </li>
-@endcan
+{{--@endcan--}}
+{{--@can('manage_language')--}}
+{{--    <li class="nav-item {{ Request::is('admin/languages*') ? 'active' : '' }}">--}}
+{{--        <a class="nav-link d-flex align-items-center py-3" aria-current="page" href="{{ route('languages.index') }}">--}}
+{{--        <span class="aside-menu-icon pe-3">--}}
+{{--            <i class="fas fa-language fs-4"></i>--}}
+{{--        </span>--}}
+{{--            <span class="aside-menu-title">{!! __('messages.languages') !!}</span>--}}
+{{--        </a>--}}
+{{--    </li>--}}
+{{--@endcan--}}
 @can('manage_news_letter')
     <li class="nav-item {{ Request::is('admin/news-letter*') ? 'active' : '' }}">
         <a class="nav-link d-flex align-items-center py-3" aria-current="page" href="{{ route('news-letter.index') }}">
@@ -240,15 +240,15 @@
         </a>
     </li>
 @endcan
-@can('manage_ad')
-<li class="nav-item {{ Request::is('admin/ad-spaces*') ? 'active' : '' }}">
-    <a class="nav-link d-flex align-items-center py-3" aria-current="page" href="{{ route('ad-spaces.create') }}">
-        <span class="aside-menu-icon pe-3">
-<i class="fa-solid fa-rectangle-ad"></i>      </span>
-        <span class="aside-menu-title">{!! __('messages.ad_space.ad_space') !!}</span>
-    </a>
-</li>
-@endif
+{{--@can('manage_ad')--}}
+{{--<li class="nav-item {{ Request::is('admin/ad-spaces*') ? 'active' : '' }}">--}}
+{{--    <a class="nav-link d-flex align-items-center py-3" aria-current="page" href="{{ route('ad-spaces.create') }}">--}}
+{{--        <span class="aside-menu-icon pe-3">--}}
+{{--<i class="fa-solid fa-rectangle-ad"></i>      </span>--}}
+{{--        <span class="aside-menu-title">{!! __('messages.ad_space.ad_space') !!}</span>--}}
+{{--    </a>--}}
+{{--</li>--}}
+{{--@endif--}}
 @can('manage_contacts')
     <li class="nav-item {{ Request::is('admin/contacts*') ? 'active' : '' }}">
         <a class="nav-link d-flex align-items-center py-3" aria-current="page" href="{{ route('contacts.index') }}">
